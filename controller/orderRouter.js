@@ -47,5 +47,17 @@ router.get('/:orderId', (request, response) => {
     });
 });
 
+router.delete('/:orderId', (request, response, next) => {
+    const id = request.params.orderId;
+    Order.deleteOne({_id: id}).exec().then(result => {
+        response.status(200).json(result);
+    }).catch(error => {
+        console.log.error;
+        response.status(404).json({
+            errorMessage: error
+        });
+    });
+});
+
 module.exports = router;
 

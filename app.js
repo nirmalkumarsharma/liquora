@@ -7,8 +7,9 @@ const productRoutes = require('./controller/productRouter');
 const orderRoutes = require('./controller/orderRouter');
 
 const app = express();
-const MONGODB_ATLAS_URI = 'mongodb+srv://nirmal:nirmal@liquora-ypm2f.mongodb.net/liquora_store?retryWrites=true&w=majority'
-mongoose.connect('mongodb+srv://nirmal:nirmal@liquora-ypm2f.mongodb.net/liquora?retryWrites=true&w=majority', {
+const databaseConfig = require('./application.json');
+const MONGODB_ATLAS_URI_LIQUORA = databaseConfig.env.MONGODB_ATLAS_URI;
+mongoose.connect(MONGODB_ATLAS_URI_LIQUORA, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

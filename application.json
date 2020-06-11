@@ -1,5 +1,5 @@
 {
     "env": {
-        "mongoPassword" : "nirmal"
+        "MONGODB_ATLAS_URI": "mongodb+srv://nirmal:nirmal@liquora-ypm2f.mongodb.net/liquora_store?retryWrites=true&w=majority"
     }
 }
