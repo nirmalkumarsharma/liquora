@@ -42,7 +42,7 @@ router.get('/:productId', (request, response, next) => {
         }
     }).catch(error => {
         console.log.error;
-        response.status(404).json({
+        response.status(500).json({
             errorMessage: error
         });
     });

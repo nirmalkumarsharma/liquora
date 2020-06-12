@@ -5,9 +5,11 @@ const bodyParser = require('body-parser')
 
 const productRoutes = require('./controller/productRouter');
 const orderRoutes = require('./controller/orderRouter');
+const userRoutes = require('./controller/userRouter');
 
 const app = express();
 const databaseConfig = require('./application.json');
+
 const MONGODB_ATLAS_URI_LIQUORA = databaseConfig.env.MONGODB_ATLAS_URI;
 mongoose.connect(MONGODB_ATLAS_URI_LIQUORA, {
     useNewUrlParser: true,
@@ -20,6 +22,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/users', userRoutes);
 
 app.use((request, response, next) => {
     const error = new Error('Invalid or Bad Request');
