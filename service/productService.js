@@ -12,7 +12,7 @@ exports.getAllProducts = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};
 
 exports.addProduct = (request, response, next) => {
     const product = new Product({
@@ -25,7 +25,7 @@ exports.addProduct = (request, response, next) => {
         message: "Successfully added a new product",
         addedProduct : product
     });
-}
+};
 
 exports.getProduct = (request, response, next) => {
     const id = request.params.productId;
@@ -44,7 +44,7 @@ exports.getProduct = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};
 
 exports.deleteProduct = (request, response, next) => {
     const id = request.params.productId;
@@ -56,7 +56,7 @@ exports.deleteProduct = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};
 
 exports.updateProduct = (request, response, next) => {
     const id = request.params.productId;
@@ -74,4 +74,4 @@ exports.updateProduct = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};

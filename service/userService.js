@@ -40,7 +40,7 @@ exports.registerUser = (request, response, next) => {
                 errorMessage: error
         });
     });    
-}
+};
 
 exports.deleteUser = (request, response, next) => {
     const id = request.params.userId;
@@ -52,7 +52,7 @@ exports.deleteUser = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};
 
 exports.login = (request, response, next) => {
     User.find({email: request.body.email}).exec().then( user => {
@@ -91,4 +91,4 @@ exports.login = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};

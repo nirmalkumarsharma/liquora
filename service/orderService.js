@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const Order = require('../entity/order');
 
-
 exports.getAllOrders = (request, response, next) => {
     Order.find().exec().then(docs => {
         console.log(docs);
@@ -44,7 +43,7 @@ exports.createOrder = (request, response, next) => {
         message: "Successfully added a new product",
         addedOrder : order
     });
-}
+};
 
 exports.deleteOrder = (request, response, next) => {
     const id = request.params.orderId;
@@ -56,4 +55,4 @@ exports.deleteOrder = (request, response, next) => {
             errorMessage: error
         });
     });
-}
+};
