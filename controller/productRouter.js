@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Product = require('../entity/product');
+const checkAuth = require('../security/checkAuth');
 
 router.get('/', (request, response, next) => {
     Product.find().exec().then(docs => {
@@ -16,7 +17,7 @@ router.get('/', (request, response, next) => {
     });
 });
 
-router.post('/', (request, response, next) => {
+router.post('/', checkAuth,(request, response, next) => {
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
         name: request.body.name,
@@ -48,7 +49,7 @@ router.get('/:productId', (request, response, next) => {
     });
 });
 
-router.delete('/:productId', (request, response, next) => {
+router.delete('/:productId', checkAuth,(request, response, next) => {
     const id = request.params.productId;
     Product.remove({_id: id}).exec().then(result => {
         response.status(200).json(result);
@@ -60,7 +61,7 @@ router.delete('/:productId', (request, response, next) => {
     });
 });
 
-router.patch('/:productId', (request, response, next) => {
+router.patch('/:productId', checkAuth,(request, response, next) => {
     const id = request.params.productId;
     const updateOps = {};
 

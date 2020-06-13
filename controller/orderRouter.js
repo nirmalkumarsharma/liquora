@@ -3,8 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Order = require('../entity/order');
+const checkAuth = require('../security/checkAuth');
 
-router.get('/', (request, response, next) => {
+router.get('/', checkAuth, (request, response, next) => {
     Order.find().exec().then(docs => {
         console.log(docs);
         response.status(200).json(docs);
@@ -16,7 +17,7 @@ router.get('/', (request, response, next) => {
     });
 });
 
-router.post('/', (request, response, next) => {
+router.post('/', checkAuth, (request, response, next) => {
     const order = new Order({
         _id: new mongoose.Types.ObjectId(),
         items : request.body.items
@@ -28,7 +29,7 @@ router.post('/', (request, response, next) => {
     });
 });
 
-router.get('/:orderId', (request, response) => {
+router.get('/:orderId', checkAuth, (request, response) => {
     const id = request.params.orderId;
     Order.findById(id).exec().then(doc => {
         console.log("From database", doc);
@@ -47,7 +48,7 @@ router.get('/:orderId', (request, response) => {
     });
 });
 
-router.delete('/:orderId', (request, response, next) => {
+router.delete('/:orderId', checkAuth, (request, response, next) => {
     const id = request.params.orderId;
     Order.deleteOne({_id: id}).exec().then(result => {
         response.status(200).json(result);
