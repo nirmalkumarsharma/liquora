@@ -2,9 +2,13 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
 
 const User = require('../entity/user');
-const { request, response } = require('express');
+
+const applicationConfig = require('./../application.json');
+
+const SECRET = applicationConfig.env.SECRET_PHRASE;
 
 router.post('/signup', (request, response, next) => {
     User.find({email: request.body.email}).exec().then(result => {
@@ -46,6 +50,45 @@ router.delete('/:userId', (request, response, next) => {
         response.status(200).json(result);
     }).catch(error => {
         console.log.error;
+        response.status(500).json({
+            errorMessage: error
+        });
+    });
+});
+
+router.post('/login', (request, response, next) => {
+    User.find({email: request.body.email}).exec().then( user => {
+        if(user.length < 1){
+            return response.status(404).json({
+                errorMessage: 'User doesn\'t exist'
+            });
+        } else {
+            bcrypt.compare(request.body.password, user[0].password, (error, result) => {
+                if(error) {
+                    return response.status(401).json({
+                        errorMessage: 'Authorization failed'
+                    });
+                } else if (result) {
+
+                    const token = jwt.sign({
+                        userId : user[0]._id,
+                        email: user[0].email
+                    }, SECRET, {
+                        expiresIn: "1h"
+                    });
+                    return response.status(200).json({
+                        message: 'Authorization successful',
+                        bearerJWT: token
+                    });
+                } else {
+                    return response.status(401).json({
+                        errorMessage: 'Authorization failed'
+                    });
+                }
+            });
+        }
+    }).catch(error => {
+        console.log(error);
         response.status(500).json({
             errorMessage: error
         });

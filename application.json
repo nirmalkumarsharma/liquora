@@ -1,5 +1,6 @@
 {
     "env": {
-        "MONGODB_ATLAS_URI": "mongodb+srv://nirmal:nirmal@liquora-ypm2f.mongodb.net/liquora_store?retryWrites=true&w=majority"
+        "MONGODB_ATLAS_URI": "mongodb+srv://nirmal:nirmal@liquora-ypm2f.mongodb.net/liquora_store?retryWrites=true&w=majority",
+        "SECRET_PHRASE":"5a3a74f83c5e46690e463e1cb5ac5fd"
     }
 }

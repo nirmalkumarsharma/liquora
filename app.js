@@ -7,10 +7,12 @@ const productRoutes = require('./controller/productRouter');
 const orderRoutes = require('./controller/orderRouter');
 const userRoutes = require('./controller/userRouter');
 
-const app = express();
-const databaseConfig = require('./application.json');
+const applicationConfig = require('./application.json');
 
-const MONGODB_ATLAS_URI_LIQUORA = databaseConfig.env.MONGODB_ATLAS_URI;
+const app = express();
+
+
+const MONGODB_ATLAS_URI_LIQUORA = applicationConfig.env.MONGODB_ATLAS_URI;
 mongoose.connect(MONGODB_ATLAS_URI_LIQUORA, {
     useNewUrlParser: true,
     useUnifiedTopology: true
